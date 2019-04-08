@@ -1,9 +1,13 @@
+"""
+this script represents a machine learning API
+"""
+
 import os
 import pickle
-
 from flask import Flask
 from flask import request
 from sklearn import linear_model
+
 
 # creating and saving some model
 reg_model = linear_model.LinearRegression()
@@ -15,19 +19,19 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+    """
+        main api route
+    """
     return "true"
 
 @app.route('/api', methods=['GET'])
 def get_prediction():
+    """
+        prediction api route
+    """
     feature1 = float(request.args.get('f1'))
     feature2 = float(request.args.get('f2'))
     feature3 = float(request.args.get('f3'))
     loaded_model = pickle.load(open('some_model.pkl', 'rb'))
     prediction = loaded_model.predict([[feature1, feature2, feature3]])
     return str(prediction)
-
-# if __name__ == '__main__':
-#     # if os.environ['ENVIRONMENT'] == 'production':
-#     #     app.run(port=80,host='0.0.0.0')
-#     # if os.environ['ENVIRONMENT'] == 'local':
-#     app.run(debug=debug, port=5000,host='0.0.0.0')
