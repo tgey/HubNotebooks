@@ -1,0 +1,7 @@
+site_name: Medicision - Dev. Repo
+theme: readthedocs
+repo_url: https://github.com/tgey/Medicision
+site_description: 'Medicision is coming'
+
+nav:
+- Home: home.md

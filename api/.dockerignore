@@ -1,0 +1,10 @@
+jupyter_notebooks*
+*/env*
+*/venv*
+*.env
+venv*
+*.log
+.git
+.gitignore
+**/__pycache__
+**/.vscode

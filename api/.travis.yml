@@ -1,0 +1,17 @@
+anguage: python
+python: 3.6
+branches: master
+install:
+- pip install -r requirements
+before_deploy:
+- mkdocs build --verbose --clean --strict
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: "$github_token"
+  local_dir: site
+  on:
+    branch: master
+notifications:
+  slack:
+    secure: sIoQQ/5iqeSwodCcd/EgjpoFBTmjTnF2ZuMIR88pgU/kMd0iwRBaxehBWDr3iDP7AsQEu9I70YTLWXRNpu1Kk26VQjQ3mlyn8DZyd68qJGEg4rS1jx6tYS1d1C6UcV9LKRlZPAarqLI8TrmS5BgHrhuo+5Oe5lCnOoEuhYKa0Iq6ERF1XWcRzH8xKjlXqLoqF+nObyQLUQoY5E165TTvj/4F4H1gTnLgTGkWKTJMk5D0Cw3dJaoj2CtoS9tgFMFg6QCQ+QOsy2gqufCe3LKzT1EL0hEIq9iMA7bkvSf0jSRLvpjDyeGweH+04aLzMvRuzZeYJ5bV812WQ2XFXmtJkYN+3jOqaAq7Wdww4MJch3x1cuM9dpqYEl0fTF1W6wuY5Tgcv8bmtdVIZGB8US24lNF5wMS0UdJi7g5aMGO0aUWVjVEz6he5N/Z+MSo5teAcf++Sn6i3lmjoAR8P7aP4nlAKVjsCKCD5t2pMwNi51rm18xUy72rkObfjzwa1Kh7YDUvz1cD0m+VVwZOjdT6PA1BgXYoK9CUTxyfZwGS//JD/Lb2UXg3Dzr3NDfGINpLTRO2QmNZyrv4HSMma/M2K4VJ7DE8rvjAXJzHdJj3Odn/RyIU1Un49IHrVqcbBDz7cugH3FKHbHalc/cGEJ27qqzbyZVk3cK4u6TjHgd342tY=
