@@ -6,7 +6,8 @@ install:
 before_script:
 - cd api/
 script:
-- pylint --rcfile=.pylintrc **/*.py
+- ls
+- pylint --rcfile=.pylintrc *.py
 before_deploy:
 - mkdocs build --verbose --clean --strict
 
