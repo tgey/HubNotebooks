@@ -4,6 +4,7 @@ branches: master
 install:
 - pip install -r requirements
 before_deploy:
+- cd api/
 - mkdocs build --verbose --clean --strict
 deploy:
   provider: pages
