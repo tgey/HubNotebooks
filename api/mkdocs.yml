@@ -1,7 +1,7 @@
-site_name: Medicision - Dev. Repo
+site_name: Venomia
 theme: readthedocs
-repo_url: https://github.com/tgey/Medicision
-site_description: 'Medicision is coming'
+repo_url: https://github.com/tgey/HubVenom
+site_description: 'Venomia is coming'
 
 nav:
-- Home: home.md
+  - Home: home.md
