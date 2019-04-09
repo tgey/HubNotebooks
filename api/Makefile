@@ -8,6 +8,6 @@ down:
 restart: down up
 
 pylint:
-	pylint --rcfile=.pylintrc **/*.py
+	find . -name "*.py" -exec pylint --rcfile=.pylintrc '{}' +
 pycodestyle:
 	pycodestyle --max-line-length=119 .

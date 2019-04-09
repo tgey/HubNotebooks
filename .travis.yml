@@ -6,8 +6,7 @@ install:
 before_script:
 - cd api/
 script:
-- ls
-- pylint --rcfile=.pylintrc *.py
+- 	find . -name "*.py" -exec pylint --rcfile=.pylintrc '{}' +
 before_deploy:
 - mkdocs build --verbose --clean --strict
 
