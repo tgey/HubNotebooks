@@ -1,13 +1,10 @@
 language: python
 python: 3.6
-branches: master
 install:
-- pip install -r api/requirements.txt
-before_script:
-- cd api/
+- pip install -r requirements.txt
 script:
-- 	find . -name "*.py" -exec pylint --rcfile=.pylintrc '{}' +
-before_deploy:
+- cd api/
+- find . -name "*.py" -exec pylint --rcfile=.pylintrc '{}' +
 - mkdocs build --verbose --clean --strict
 
 notifications:
