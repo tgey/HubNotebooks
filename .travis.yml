@@ -5,6 +5,7 @@ install:
 script:
 - cd api/
 - find . -name "*.py" -exec pylint --rcfile=.pylintrc '{}' +
+- cd ../jupyter
 - mkdocs build --verbose --clean --strict
 
 notifications:
