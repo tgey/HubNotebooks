@@ -4,7 +4,9 @@ services:
   api:
     container_name: api # Name can be anything
     restart: always
-    build: ./api
+    build: 
+      context: ./
+      dockerfile: ./api/Dockerfile
     ports:
       - "8000:8000"
     command: gunicorn -w 1 -b :8000 app:app
@@ -16,3 +18,13 @@ services:
       - 8080:80
     depends_on:
       - api
+  notebook:
+    container_name: jupyter_lab
+    restart: always
+    build: 
+      context: ./
+      dockerfile: ./jupyter/Dockerfile
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./jupyter:/home/jupyterlab

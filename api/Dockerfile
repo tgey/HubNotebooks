@@ -1,9 +1,9 @@
 FROM python:3.6
 
-RUN mkdir -p /home/project/app
-WORKDIR /home/project/app
+RUN mkdir -p /home/api
+WORKDIR /home/api
 
-COPY requirements.txt /home/project/app
+COPY requirements.txt /home/api
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . /home/project/app
+COPY ./api /home/api
