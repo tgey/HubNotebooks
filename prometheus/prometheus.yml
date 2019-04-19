@@ -1,13 +1,11 @@
 global:
   scrape_interval: 15s
-  evaluation_interval: 15s
+  evaluation_interval: 5s
   external_labels:
     monitor: 'docker-host-alpha'
 
 rule_files:
-  - "targets.rules"
-  - "host.rules"
-  - "containers.rules"
+  - "alert.rules"
 
 scrape_configs:
   - job_name: 'cadvisor'
@@ -24,3 +22,10 @@ scrape_configs:
     scrape_interval: 5s
     static_configs:
       - targets: ['nodeexporter:9100']
+
+alerting:
+  alertmanagers:
+  - scheme: http
+    static_configs:
+    - targets: 
+      - 'alertmanager:9093'

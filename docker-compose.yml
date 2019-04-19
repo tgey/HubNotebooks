@@ -88,6 +88,20 @@ services:
       - cadvisor:cadvisor
       - node-exporter:node-exporter
 
+  alertmanager:
+    image: prom/alertmanager:v0.16.2
+    container_name: alertmanager
+    volumes:
+      - ./alertmanager/:/etc/alertmanager/
+    command:
+      - '--config.file=/etc/alertmanager/config.yml'
+      - '--storage.path=/alertmanager'
+    restart: unless-stopped
+    expose:
+      - 9093
+    networks:
+      - monitoring
+
   grafana:
     image: grafana/grafana:4.6.2
     container_name: grafana
