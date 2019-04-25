@@ -1,0 +1,47 @@
+├── LICENSE
+├── Makefile           <-
+│
+├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
+│                         generated with `pip freeze > requirements.txt`
+├── README.md          <- The top-level README for developers using this project.
+|
+├── .travis.yml
+|
+├── docker-compose.yml
+|
+|
+|
+├── alertmanager
+|
+|
+├── prometheus
+|
+|
+├── nginx
+|
+|
+├── api
+|
+|
+└── Jupyter
+    |
+    ├── data
+    │   ├── processed      
+    │   └── raw            
+    ├── docs               
+    ├── img                
+    ├── models             
+    ├── notebooks          
+    |   |     
+    │   └── eda   
+    │   └── evaluation    
+    │   └── modeling      
+    │   └── poc            
+    ├── references         
+    ├── reports            
+    │   └── figures        
+    └── src
+        ├── data
+        ├── features
+        ├── models
+        └── visualization

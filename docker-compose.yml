@@ -1,24 +1,41 @@
 version: '3'
 
 services:
+  proxy:
+    image: traefik
+    command: --api --docker --logLevel=DEBUG
+    networks:
+      - monitoring
+    ports:
+      - 80:80
+      - 8080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /dev/null:/traefik.toml
+    labels:
+      traefik.enable: true
+      traefik.docker.network: monitoring
+      traefik.port: 8080
+      traefik.backend: traefik
+      traefik.logLevel: DEBUG
+      traefik.docker.endpoint: unix:///var/run/docker.sock
+      traefik.docker.domain: docker.localhost
+      traefik.docker.watch: true
+    
   api:
-    container_name: api # Name can be anything
+    container_name: api
     restart: always
     build: 
       context: ./
       dockerfile: ./api/Dockerfile
-    ports:
-      - "8000:8000"
-    command: gunicorn -w 1 -b :8000 app:app
-  
-  server:
-    container_name: server_nginx
-    restart: always
-    build: ./nginx
-    ports:
-      - 8080:80
-    depends_on:
-      - api
+    command: gunicorn -w 1 -b :5000 app:app
+    networks:
+      - monitoring
+    labels:
+      traefik.backend: api
+      traefik.docker.network: monitoring
+      traefik.frontend.rule: Host:iapi.localhost
+      traefik.port: 5000
 
   notebook:
     container_name: jupyter_lab
@@ -26,8 +43,13 @@ services:
     build: 
       context: ./
       dockerfile: ./jupyter/Dockerfile
-    ports:
-      - "8888:8888"
+    networks:
+      - monitoring
+    labels:
+            traefik.backend: notebook
+            traefik.docker.network: monitoring
+            traefik.frontend.rule: Host:jupyter.localhost
+            traefik.port: 8888
     volumes:
       - ./jupyter:/home/jupyterlab
 
@@ -39,12 +61,13 @@ services:
       - /var/run:/var/run:rw
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
-    expose:
-      - 8080
-    ports:
-      - "8005:8080"
     networks:
       - monitoring
+    labels:
+            traefik.backend: cadvisor
+            traefik.docker.network: monitoring
+            traefik.frontend.rule: Host:cadvisor.localhost
+            traefik.port: 80
   
   node-exporter:
     image: prom/node-exporter:v0.17.0
@@ -59,12 +82,15 @@ services:
       - '--path.sysfs=/host/sys'
       - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
     restart: unless-stopped
-    expose:
-      - 9100
     networks:
       - monitoring
     labels:
-      org.label-schema.group: "monitoring"
+            traefik.backend: node-exporter
+            traefik.docker.network: monitoring
+            traefik.frontend.rule: Host:nodeexporter.localhost
+            traefik.port: 9100
+            org.label-schema.group: "monitoring"
+      
 
   prometheus:
     image: prom/prometheus:v2.9.1
@@ -78,12 +104,13 @@ services:
       - '--web.console.libraries=/etc/prometheus/console_libraries'
       - '--web.console.templates=/etc/prometheus/consoles'
       - '--storage.tsdb.retention=200h'
-    expose:
-      - 9090
-    ports:
-      - "9090:9090"
     networks:
       - monitoring
+    labels:
+            traefik.backend: prometheus
+            traefik.docker.network: monitoring
+            traefik.frontend.rule: Host:prometheus.localhost
+            traefik.port: 9090
     links:
       - cadvisor:cadvisor
       - node-exporter:node-exporter
@@ -97,26 +124,43 @@ services:
       - '--config.file=/etc/alertmanager/config.yml'
       - '--storage.path=/alertmanager'
     restart: unless-stopped
-    expose:
-      - 9093
     networks:
       - monitoring
+    labels:
+            traefik.backend: alertmanager
+            traefik.docker.network: monitoring
+            traefik.frontend.rule: Host:alertmanager.localhost
+            traefik.port: 9093
 
   grafana:
     image: grafana/grafana:4.6.2
-    container_name: grafana
+    container_name:   grafana
     volumes:
       - grafana-data:/var/lib/grafana
-    expose:
-      - 3000
-    ports:
-      - "3000:3000"  
     networks:
       - monitoring
-
+    labels:
+            traefik.backend: grafana
+            traefik.docker.network: monitoring
+            traefik.frontend.rule: Host:grafana.localhost
+            traefik.port: 3000
+          
+  doccano:
+    image: chakkiworks/doccano
+    container_name: doccano
+    volumes:
+      - doccano-data:/var/lib/doccano
+    networks:
+      - monitoring
+    labels:
+            traefik.backend: doccano
+            traefik.docker.network: monitoring
+            traefik.frontend.rule: Host:doccano.localhost
+            traefik.port: 80
 volumes:
   prometheus-data: {}
   grafana-data: {}
+  doccano-data: {}
 
 networks:
   monitoring:
