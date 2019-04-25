@@ -143,7 +143,7 @@ services:
             traefik.docker.network: monitoring
             traefik.frontend.rule: Host:grafana.localhost
             traefik.port: 3000
- 
+
   doccano:
     image: chakkiworks/doccano
     container_name: doccano
