@@ -1,9 +1,10 @@
 version: '3'
 
 services:
-  proxy:
+  traefik:
     image: traefik
-    command: --api --docker --logLevel=DEBUG
+    container_name: traefik
+    command: --api --web --metrics.prometheus --metrics.prometheus.buckets="0.1,0.3,1.2,5.0" --docker --logLevel=DEBUG
     networks:
       - monitoring
     ports:
