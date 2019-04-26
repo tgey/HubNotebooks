@@ -149,7 +149,7 @@ services:
     image: chakkiworks/doccano
     container_name: doccano
     volumes:
-      - doccano-data:/var/lib/doccano
+      - doccano-data:/doccano
     networks:
       - monitoring
     labels:

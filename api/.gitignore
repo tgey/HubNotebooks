@@ -1,5 +1,0 @@
-.docker-compose.override.yaml
-venv
-.ipynb_checkpoints
-.env
-.vscode
