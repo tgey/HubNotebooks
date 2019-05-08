@@ -46,7 +46,7 @@ services:
       dockerfile: ./jupyter/Dockerfile
     networks:
       - monitoring
-    ports: 
+    ports:
       - "8888:8888"
     volumes:
       - ./jupyter:/home/jupyterlab
