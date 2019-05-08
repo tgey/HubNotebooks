@@ -5,3 +5,5 @@ site_description: 'Venomia is coming'
 
 nav:
   - Home: home.md
+  - Services: services.md
+  - Librairies: packages.md
