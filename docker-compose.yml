@@ -46,11 +46,8 @@ services:
       dockerfile: ./jupyter/Dockerfile
     networks:
       - monitoring
-    labels:
-            traefik.backend: notebook
-            traefik.docker.network: monitoring
-            traefik.frontend.rule: Host:jupyter.localhost
-            traefik.port: 8888
+    ports: 
+      - "8888:8888"
     volumes:
       - ./jupyter:/home/jupyterlab
 
