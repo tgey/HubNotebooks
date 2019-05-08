@@ -1,4 +1,4 @@
-FROM nikolaik/python-nodejs:latest
+FROM python:3.6
 
 WORKDIR /home/jupyterlab
 
@@ -7,7 +7,6 @@ COPY requirements.txt /home/jupyterlab
 RUN pip install --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt
 
-RUN jupyter labextension install @jupyterlab/google-drive
 
 COPY . /home/jupyterlab
 
