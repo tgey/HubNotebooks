@@ -22,7 +22,7 @@ The projects uses the following technologies :
 | [Docker] (& [docker-compose]) | application isolation from root system| X                         |
 | [Python 3.7] ([PEP8] standard)| main language                         | X                         |
 | [Neo4J]                       | Graph database                        | neo4j.localhost           |
-| [JupyterLab]                  | IDE for notebooks                     | jupyter.localhost         |
+| [JupyterLab]                  | IDE for notebooks                     | localhost:8888            |
 | [Doccano]                     | Annotation tool                       | doccano.localhost         |
 | [Grafana]                     | Graphic metrics monitor               | grafana.localhost         |
 | [Prometheus]                  | metrics manager                       | prometheus.localhost      |
