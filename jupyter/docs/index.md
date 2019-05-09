@@ -1,4 +1,3 @@
-[![Build Status on Branch IA/Master](https://travis-ci.com/tgey/Medicision.svg?token=1REVcwurvzvKeLof9eLu&branch=IA/Master)](https://travis-ci.com/tgey/Medicision)
 
 # Update all pip packages deprecated
 ```console

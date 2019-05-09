@@ -1,23 +1,23 @@
 ├── LICENSE
+|
 ├── Makefile           <-
 │
 ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
 │                         generated with `pip freeze > requirements.txt`
 ├── README.md          <- The top-level README for developers using this project.
 |
+├── CHANGELOG.md
+|
 ├── .travis.yml
 |
 ├── docker-compose.yml
 |
-|
+├── .gitignore
 |
 ├── alertmanager
 |
 |
 ├── prometheus
-|
-|
-├── nginx
 |
 |
 ├── api
