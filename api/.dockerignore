@@ -1,10 +1,6 @@
-jupyter_notebooks*
-*/env*
-*/venv*
-*.env
-venv*
+.env
 *.log
-.git
-.gitignore
-**/__pycache__
-**/.vscode
+__pycache__
+.vscode
+.ipynb_checkpoints
+.dockerignore
