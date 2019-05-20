@@ -4,3 +4,4 @@ processed
 .vscode
 **/__pycache__
 .dockerignore
+data
